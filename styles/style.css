@@ -1,0 +1,118 @@
+footer {
+	height: 50px;
+    background: #f8f9fa;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 15px 30px;
+    border-top: 1px solid #e8e9eb;
+}
+
+nav {
+	-webkit-box-shadow: 0 1px 2px #dedfe0;
+    box-shadow: 0 1px 2px #dedfe0;
+    -moz-box-shadow: 0 1px 2px #dedfe0;
+}
+
+content {
+	padding-top: 90px;
+}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 82px;
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+  padding: 60px 15px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+main {
+	padding-top: 90px;
+}
+
+[role=entry] h1, 
+[role=entry] h2, 
+[role=entry] p {
+	width: 100%;
+}
+
+[role=entry] button {
+	width: 200px;
+}
+
+ul {
+  list-style: none;
+}
+
+.question-options label {
+  border: 1px solid #cacbcc;
+  border-radius: 5px;
+  width: 100%;
+  padding: 7px 15px;
+  transition: background 0.6s;
+}
+
+
+.question-options label:hover {
+  background: #f5f5f5;
+}
+
+.question-options input {
+  margin-right: 7px;
+}
+
+.question-number {
+    margin-bottom: 60px;
+}
+
+.question-text {
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.skip-button {
+  margin-right: 15px;
+  
+  cursor: pointer;
+}
+
+a.skip-button {
+  color: #007bff !important;
+}
+
+a.skip-button:hover {
+  color: #004aff !important;
+}

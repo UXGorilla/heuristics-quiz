@@ -1,0 +1,82 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>UX Gorilla- Heuristic Evaluation Quiz</title>
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<!-- Custom styles for this template -->
+	<link href="styles/style.css" rel="stylesheet">
+</head>
+
+<body>
+	<div id="app">
+		<header>
+			<!-- Fixed navbar -->
+			<nav class="navbar navbar-expand-sm bg-light fixed-top">
+				<a class="navbar-brand" href="#">Fixed navbar</a>
+
+			</nav>
+		</header>
+
+		<!-- Begin page content -->
+		<main role="main" class="container align-middle">
+			<div class="row" role="entry" v-if="!quizStarted">
+				<h1>Start quiz</h1>
+				<h2>{{ quizDetails.title }}</h2>
+				<p>{{ quizDetails.description }} | {{ quizDetails.questions.length }} questions</p>
+				<button class="btn btn-primary" v-on:click="startQuiz">Start Quiz</button>
+			</div>
+			<div class="row" role="quiz" v-else>
+				<div class="col col-8 offset-md-2">
+					<div class="question-number">
+						Question {{ currentQuestionIndex + 1 }}:
+					</div>
+					<div class="question-text" v-html="question.question">
+					</div>
+					<div class="question-options">
+						<ul>
+							<li v-for="(option, index) in question.options">
+								<label v-bind:for="index">
+									<input type="radio" v-bind:name="'option_'+currentQuestionIndex" 
+									v-bind:id="index" 
+									v-bind:value="index">
+									<span v-html="option.label"></span> 
+								</label>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer class="footer container-fluid" >
+			<div class="row" v-if="quizStarted">
+				<div class="col">
+					Question {{ currentQuestionIndex + 1 }} / {{ quizDetails.questions.length }}
+				</div>
+				<div class="col text-right">
+					<a class="skip-button" v-on:click="skipQuestion" v-show="currentQuestionIndex < quizDetails.questions.length">Skip Question</a>
+					<button class="btn btn-primary">Check Answer</button>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+    <!-- Bootstrap core JavaScript
+    	================================================== -->
+    	<!-- Placed at the end of the document so the pages load faster -->
+    	<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
+    	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    	<script type="text/javascript" src="scripts/script.js"></script>
+    </body>
+    </html>
