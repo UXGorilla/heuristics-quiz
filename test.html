@@ -42,6 +42,7 @@
 			<div class="row" role="result" v-if="quizStatus == 'complete'">
 				<div class="col offset-md-2 col-md-8">
 					<h1>Final result</h1><br>
+					<div class="result-time-taken"><h2>Time Taken: {{ result.timeTaken.minutes }} m {{ result.timeTaken.seconds }} s</h2></div>
 					<div class="result-correct"><h2>Correct Answers: <b>{{ correct }}</b></h2></div>
 					<div class="result-incorrect"><h2>Incorrect Answers: <b>{{ incorrect }}</b></h2></div>
 					<div class="result-skipped"><h2>Skipped: <b>{{ skipped }}</b></h2></div>

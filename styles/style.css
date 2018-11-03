@@ -175,3 +175,7 @@ a.skip-button:hover {
 .resume-button {
   margin-left: 15px;
 }
+
+.result-time-taken h2 {
+  color: var(--info);
+}
