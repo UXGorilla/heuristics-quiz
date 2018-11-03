@@ -21,8 +21,8 @@
 		<header>
 			<!-- Fixed navbar -->
 			<nav class="navbar navbar-expand-sm bg-light fixed-top">
-				<a class="navbar-brand" href="#">Fixed navbar</a>
-
+				<a class="navbar-brand" href="#">UX Gorilla</a>
+				<span class="timer" v-if="quizStatus == 'started'">Time Taken: {{ timeElapsed.minutes }}:{{ timeElapsed.seconds }}</span>
 			</nav>
 		</header>
 
@@ -35,15 +35,16 @@
 				<p>{{ quizDetails.description }}</p>
 				<p>{{ quizDetails.questions.length }} questions</p>
 				<button class="btn btn-primary" v-on:click="startQuiz">Start Quiz</button>
+				<button class="btn btn-success resume-button" v-if="quizResumable" v-on:click="resumeQuiz">Resume Quiz</button>
 			</div>
 			
 
 			<div class="row" role="result" v-if="quizStatus == 'complete'">
 				<div class="col offset-md-2 col-md-8">
 					<h1>Final result</h1><br>
-					<div class="result-correct"><h2>Correct Answers: <b>20</b></h2></div>
-					<div class="result-incorrect"><h2>Incorrect Answers: <b>10</b></h2></div>
-					<div class="result-skipped"><h2>Skipped: <b>5</b></h2></div>
+					<div class="result-correct"><h2>Correct Answers: <b>{{ correct }}</b></h2></div>
+					<div class="result-incorrect"><h2>Incorrect Answers: <b>{{ incorrect }}</b></h2></div>
+					<div class="result-skipped"><h2>Skipped: <b>{{ skipped }}</b></h2></div>
 				</div>
 			</div>
 
@@ -76,10 +77,10 @@
 						<ul>
 							<li v-for="(option, index) in question.options" :key="index">
 								<label v-bind:for="index">
-									<input v-model="answer[currentQuestionIndex]" type="radio" v-bind:name="'option_'+currentQuestionIndex" 
+									<input v-model="answer[currentQuestionIndex].selection" type="radio" v-bind:name="'option_'+currentQuestionIndex" 
 									v-bind:id="index" 
 									v-bind:value="index">
-									<span v-html="option.label"></span> 
+									<span v-html="option.label"></span>
 								</label>
 							</li>
 						</ul>
@@ -93,11 +94,16 @@
 				<div class="col">
 					Question {{ currentQuestionIndex + 1 }} / {{ quizDetails.questions.length }}
 				</div>
-				<div class="col text-right">
+				<div class="col text-right" v-if="currentQuestionIndex < quizDetails.questions.length - 1"> 
 					<a class="skip-button" v-on:click="skipQuestion" v-if="currentQuestionIndex < quizDetails.questions.length && showCheckAnswer">Skip Question</a>
 					<button v-if="showCheckAnswer" class="btn btn-primary" v-on:click="checkAnswer">Check Answer</button>
 					<button v-if="!showCheckAnswer" class="btn btn-primary next-question bounce" v-on:click="nextQuestion">Next Question</button>
-					
+
+				</div>
+				<div class="col text-right" v-else>
+					<a class="skip-button" v-on:click="skipQuestion" v-if="currentQuestionIndex < quizDetails.questions.length && showCheckAnswer">Skip Question</a>
+					<button v-if="showCheckAnswer" class="btn btn-primary" v-on:click="checkAnswer">Check Answer</button>
+					<button v-if="!showCheckAnswer" class="btn btn-primary next-question bounce" v-on:click="showResult">See Result</button>
 				</div>
 			</div>
 		</footer>

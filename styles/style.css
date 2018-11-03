@@ -18,6 +18,15 @@ content {
 	padding-top: 90px;
 }
 
+.question-text img {
+    max-height: 400px;
+    margin-top: 15px;
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -157,4 +166,12 @@ a.skip-button:hover {
   -webkit-animation-fill-mode: both; 
   animation-fill-mode: both; 
   animation-iteration-count: 3;
+}
+
+.timer {
+  margin-left: auto;
+}
+
+.resume-button {
+  margin-left: 15px;
 }
