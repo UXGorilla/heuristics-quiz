@@ -28,24 +28,55 @@
 
 		<!-- Begin page content -->
 		<main role="main" class="container align-middle">
-			<div class="row" role="entry" v-if="!quizStarted">
-				<h1>Start quiz</h1>
+			
+			<div class="row" role="entry" v-if="quizStatus == 'starting'">
+				<h1 style="margin-bottom: 60px;">Start quiz</h1>
 				<h2>{{ quizDetails.title }}</h2>
-				<p>{{ quizDetails.description }} | {{ quizDetails.questions.length }} questions</p>
+				<p>{{ quizDetails.description }}</p>
+				<p>{{ quizDetails.questions.length }} questions</p>
 				<button class="btn btn-primary" v-on:click="startQuiz">Start Quiz</button>
 			</div>
-			<div class="row" role="quiz" v-else>
-				<div class="col col-8 offset-md-2">
+			
+
+			<div class="row" role="result" v-if="quizStatus == 'complete'">
+				<div class="col offset-md-2 col-md-8">
+					<h1>Final result</h1><br>
+					<div class="result-correct"><h2>Correct Answers: <b>20</b></h2></div>
+					<div class="result-incorrect"><h2>Incorrect Answers: <b>10</b></h2></div>
+					<div class="result-skipped"><h2>Skipped: <b>5</b></h2></div>
+				</div>
+			</div>
+
+
+			<div class="row" role="quiz" v-if="quizStatus == 'started'">
+				<div class="col col-md-8 offset-md-2">
 					<div class="question-number">
 						Question {{ currentQuestionIndex + 1 }}:
+					</div>
+					<div class="error-message" v-if="errorMessage">
+						<div class="alert alert-danger fade show" role="alert">
+							<strong>Incorrect!</strong> {{ errorMessage }}
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close" v-on:click="hideError">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+
+					</div>
+					<div class="success-message" v-if="successMessage">
+						<div class="alert alert-success fade show" role="alert">
+							<strong>Correct!</strong> {{ successMessage }}
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close" v-on:click="hideSuccess">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
 					</div>
 					<div class="question-text" v-html="question.question">
 					</div>
 					<div class="question-options">
 						<ul>
-							<li v-for="(option, index) in question.options">
+							<li v-for="(option, index) in question.options" :key="index">
 								<label v-bind:for="index">
-									<input type="radio" v-bind:name="'option_'+currentQuestionIndex" 
+									<input v-model="answer[currentQuestionIndex]" type="radio" v-bind:name="'option_'+currentQuestionIndex" 
 									v-bind:id="index" 
 									v-bind:value="index">
 									<span v-html="option.label"></span> 
@@ -58,13 +89,15 @@
 		</main>
 
 		<footer class="footer container-fluid" >
-			<div class="row" v-if="quizStarted">
+			<div class="row" v-if="quizStatus == 'started'">
 				<div class="col">
 					Question {{ currentQuestionIndex + 1 }} / {{ quizDetails.questions.length }}
 				</div>
 				<div class="col text-right">
-					<a class="skip-button" v-on:click="skipQuestion" v-show="currentQuestionIndex < quizDetails.questions.length">Skip Question</a>
-					<button class="btn btn-primary">Check Answer</button>
+					<a class="skip-button" v-on:click="skipQuestion" v-if="currentQuestionIndex < quizDetails.questions.length && showCheckAnswer">Skip Question</a>
+					<button v-if="showCheckAnswer" class="btn btn-primary" v-on:click="checkAnswer">Check Answer</button>
+					<button v-if="!showCheckAnswer" class="btn btn-primary next-question bounce" v-on:click="nextQuestion">Next Question</button>
+					
 				</div>
 			</div>
 		</footer>
@@ -75,7 +108,7 @@
     	<!-- Placed at the end of the document so the pages load faster -->
     	<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
+    	 -->
     	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     	<script type="text/javascript" src="scripts/script.js"></script>
     </body>

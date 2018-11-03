@@ -1,17 +1,17 @@
 footer {
 	height: 50px;
-    background: #f8f9fa;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 15px 30px;
-    border-top: 1px solid #e8e9eb;
+  background: #f8f9fa;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 15px 30px;
+  border-top: 1px solid #e8e9eb;
 }
 
 nav {
 	-webkit-box-shadow: 0 1px 2px #dedfe0;
-    box-shadow: 0 1px 2px #dedfe0;
-    -moz-box-shadow: 0 1px 2px #dedfe0;
+  box-shadow: 0 1px 2px #dedfe0;
+  -moz-box-shadow: 0 1px 2px #dedfe0;
 }
 
 content {
@@ -72,8 +72,12 @@ main {
 	width: 200px;
 }
 
+[role=main] {
+  margin-bottom: 160px;
+}
 ul {
   list-style: none;
+  padding-left: 0;
 }
 
 .question-options label {
@@ -82,6 +86,7 @@ ul {
   width: 100%;
   padding: 7px 15px;
   transition: background 0.6s;
+  cursor: pointer;
 }
 
 
@@ -94,13 +99,13 @@ ul {
 }
 
 .question-number {
-    margin-bottom: 60px;
+  margin-bottom: 60px;
 }
 
 .question-text {
-    margin-bottom: 30px;
-    font-weight: 600;
-    font-size: 18px;
+  margin-bottom: 30px;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .skip-button {
@@ -115,4 +120,41 @@ a.skip-button {
 
 a.skip-button:hover {
   color: #004aff !important;
+}
+
+.result-correct h2 {
+    color: var(--success);
+}
+
+.result-incorrect h2 {
+  color: var(--danger);
+}
+
+.result-skipped h2 {
+  color: var(--gray);
+}
+
+@keyframes bounce {
+ 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+ 40% {transform: translateY(-30px);} 
+ 60% {transform: translateY(-15px);} 
+} 
+
+@-webkit-keyframes bounce { 
+  0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
+  40% {-webkit-transform: translateY(-30px);} 
+  60% {-webkit-transform: translateY(-15px);} 
+} 
+
+.bounce { 
+  -webkit-animation-name: bounce; 
+  animation-name: bounce; 
+}
+
+.next-question {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s; 
+  -webkit-animation-fill-mode: both; 
+  animation-fill-mode: both; 
+  animation-iteration-count: 3;
 }
