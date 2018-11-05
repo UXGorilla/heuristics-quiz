@@ -102,13 +102,13 @@
 					<a class="skip-button" id="alternate-skip-button" v-on:click="skipQuestion" v-if="currentQuestionIndex < quizDetails.questions.length && showCheckAnswer">Skip Question</a>
 				</div>
 				<div class="col text-right" v-if="currentQuestionIndex < quizDetails.questions.length - 1"> 
-					<a class="skip-button" id="main-skip-button" v-on:click="skipQuestion" v-if="currentQuestionIndex < quizDetails.questions.length && showCheckAnswer">Skip Question</a>
+					<a class="skip-button main-skip-button" v-on:click="skipQuestion" v-if="currentQuestionIndex < quizDetails.questions.length && showCheckAnswer">Skip Question</a>
 					<button v-if="showCheckAnswer" class="btn btn-primary" v-on:click="checkAnswer">Check Answer</button>
 					<button v-if="!showCheckAnswer" class="btn btn-primary next-question bounce" v-on:click="nextQuestion">Next Question</button>
 
 				</div>
 				<div class="col text-right" v-else>
-					<a class="skip-button" v-on:click="skipQuestion" v-if="currentQuestionIndex < quizDetails.questions.length && showCheckAnswer">Skip Question</a>
+					<a class="skip-button main-skip-button" v-on:click="skipQuestion" v-if="currentQuestionIndex < quizDetails.questions.length && showCheckAnswer">Skip Question</a>
 					<button v-if="showCheckAnswer" class="btn btn-primary" v-on:click="checkAnswer">Check Answer</button>
 					<button v-if="!showCheckAnswer" class="btn btn-primary next-question bounce" v-on:click="showResult">See Result</button>
 				</div>
