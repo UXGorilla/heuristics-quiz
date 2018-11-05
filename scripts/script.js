@@ -437,17 +437,17 @@ var questions = [
 		// failureMessage: '',
 		successMessage: 'Chat feature on websites (especially e-commerce) helps user to clarify their doubts and making further experience convenient.',
 	},
-	{
-		question: `Which heuristics is being shown here? <br> <img src="images/Q39-1.jpg"> <br> <img src="images/Q39-2.jpg">`,
-		options: [
-			{label: 'visibility of system status', correct: false, failureMessage: ''},
-			{label: 'User control and freedom', correct: true, successMessage: ''},
-			{label: 'Consistency and standards', correct: false, successMessage: ''},
-			{label: 'Match between system and real world', correct: false, successMessage: ''}
-		],
-		// failureMessage: '',
-		successMessage: 'Overlapping windows reduces user experience. User should have the freedom to explore every window (boxes).',
-	},
+	// {
+	// 	question: `Which heuristics is being shown here? <br> <img src="images/Q39-1.jpg"> <br> <img src="images/Q39-2.jpg">`,
+	// 	options: [
+	// 		{label: 'visibility of system status', correct: false, failureMessage: ''},
+	// 		{label: 'User control and freedom', correct: true, successMessage: ''},
+	// 		{label: 'Consistency and standards', correct: false, successMessage: ''},
+	// 		{label: 'Match between system and real world', correct: false, successMessage: ''}
+	// 	],
+	// 	// failureMessage: '',
+	// 	successMessage: 'Overlapping windows reduces user experience. User should have the freedom to explore every window (boxes).',
+	// },
 		// {
 		// question: `The pattern which is highlighted in the image below is known as __________________, and comes under ___________________ heuristics. <br/>
 		// <img src="images/Q6-1.jpg" PATTERN:  <br>  Home > Mobile & Accessories > Mobiles > Samsung Mobile > Samsung Galaxy`,
@@ -510,7 +510,6 @@ function startQuiz(){
 
 	setInterval(function(){
 		const elapsed = vm.getTimeElapsed(vm.startTime);
-		console.log(elapsed);
 		vm.timeElapsed = vm.timeElapsed || {};
 		Vue.set(vm.timeElapsed, 'minutes', elapsed.minutes);
 		Vue.set(vm.timeElapsed, 'seconds', elapsed.seconds);
