@@ -11,7 +11,7 @@
 
 	<!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300" rel="stylesheet">
 	<!-- Custom styles for this template -->
 	<link href="styles/style.css" rel="stylesheet">
 </head>
@@ -21,7 +21,10 @@
 		<header>
 			<!-- Fixed navbar -->
 			<nav class="navbar navbar-expand-sm bg-light fixed-top">
-				<a class="navbar-brand" href="#">UX Gorilla</a>
+				<a class="navbar-brand d-none d-sm-block" href="https://uxgorilla.com" target="_blank">UX Gorilla</a>
+				<span class="d-sm-none" v-if="quizStatus == 'started'">Question {{ currentQuestionIndex + 1 }} / {{ quizDetails.questions.length }}</span>
+				<!-- Shown only before the quiz starts on mobile -->
+				<a class="navbar-brand d-sm-none" v-if="quizStatus == 'starting'" href="#">UX Gorilla</a>
 				<span class="timer" v-if="quizStatus == 'started'">Time Taken: {{ timeElapsed.minutes }}:{{ timeElapsed.seconds }}</span>
 			</nav>
 		</header>
@@ -29,7 +32,7 @@
 		<!-- Begin page content -->
 		<main role="main" class="container align-middle">
 			
-			<div class="row" role="entry" v-if="quizStatus == 'starting'">
+			<div class="container row" role="entry" v-if="quizStatus == 'starting'">
 				<h1 style="margin-bottom: 60px;">Start quiz</h1>
 				<h2>{{ quizDetails.title }}</h2>
 				<p>{{ quizDetails.description }}</p>
@@ -82,6 +85,7 @@
 									v-bind:id="index" 
 									v-bind:value="index">
 									<span v-html="option.label"></span>
+									<span v-html="option.correct" style="color: green"></span>
 								</label>
 							</li>
 						</ul>
@@ -92,11 +96,14 @@
 
 		<footer class="footer container-fluid" >
 			<div class="row" v-if="quizStatus == 'started'">
-				<div class="col">
+				<div class="col d-none d-sm-block">
 					Question {{ currentQuestionIndex + 1 }} / {{ quizDetails.questions.length }}
 				</div>
+				<div class="col d-sm-none">
+					<a class="skip-button" id="alternate-skip-button" v-on:click="skipQuestion" v-if="currentQuestionIndex < quizDetails.questions.length && showCheckAnswer">Skip Question</a>
+				</div>
 				<div class="col text-right" v-if="currentQuestionIndex < quizDetails.questions.length - 1"> 
-					<a class="skip-button" v-on:click="skipQuestion" v-if="currentQuestionIndex < quizDetails.questions.length && showCheckAnswer">Skip Question</a>
+					<a class="skip-button" id="main-skip-button" v-on:click="skipQuestion" v-if="currentQuestionIndex < quizDetails.questions.length && showCheckAnswer">Skip Question</a>
 					<button v-if="showCheckAnswer" class="btn btn-primary" v-on:click="checkAnswer">Check Answer</button>
 					<button v-if="!showCheckAnswer" class="btn btn-primary next-question bounce" v-on:click="nextQuestion">Next Question</button>
 

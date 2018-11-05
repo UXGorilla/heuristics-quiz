@@ -125,6 +125,7 @@ ul {
 
 a.skip-button {
   color: #007bff !important;
+  display: inline !important;
 }
 
 a.skip-button:hover {
@@ -172,10 +173,41 @@ a.skip-button:hover {
   margin-left: auto;
 }
 
-.resume-button {
-  margin-left: 15px;
+@media (min-width: 474px) {
+
+  .resume-button {
+    margin-left: 15px;
+  }
+}
+
+@media (max-width: 473px) {
+  #main-skip-button {
+    display: none !important;
+  }
+}
+
+@media (max-width: 473px) {
+  #main-skip-button {
+    display: none !important;
+  }
+}
+
+@media (max-width: 579px) {
+  #main-skip-button {
+    display: none !important;
+  }
+
+  #alternate-skip-button {
+    display: block !important;
+  }
 }
 
 .result-time-taken h2 {
   color: var(--info);
+}
+
+a.navbar-brand {
+  font-family: 'Montserrat', sans-serif;
+  color: #4a4a4a;
+  font-weight: 300;
 }
